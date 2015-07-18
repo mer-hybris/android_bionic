@@ -1332,6 +1332,14 @@ LIBC {
     *;
 };
 
+LIBC_N {
+  global:
+    __fread_chk;
+    __fwrite_chk;
+    getgrgid_r;
+    getgrnam_r;
+} LIBC;
+
 LIBC_PRIVATE {
   global:
     ___Unwind_Backtrace; # arm

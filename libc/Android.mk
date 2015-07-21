@@ -78,6 +78,8 @@ libc_common_src_files += \
     bionic/__poll_chk.cpp \
     bionic/__pread64_chk.cpp \
     bionic/__pread_chk.cpp \
+    bionic/__pwrite64_chk.cpp \
+    bionic/__pwrite_chk.cpp \
     bionic/__read_chk.cpp \
     bionic/__readlink_chk.cpp \
     bionic/__readlinkat_chk.cpp \
@@ -94,6 +96,7 @@ libc_common_src_files += \
     bionic/__umask_chk.cpp \
     bionic/__vsnprintf_chk.cpp \
     bionic/__vsprintf_chk.cpp \
+    bionic/__write_chk.cpp
 
 libc_bionic_ndk_src_files := \
     bionic/abort.cpp \

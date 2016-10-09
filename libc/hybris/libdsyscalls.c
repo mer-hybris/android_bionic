@@ -14,22 +14,7 @@
  * limitations under the License.
  */
 
-#include <errno.h>
 #include <sys/cdefs.h>
-
-/* Define __set_errno here so it can be hijacked by libhybris
- * at runtime (called from __set_syscall_errno)
- */
-int __set_errno(int n)
-{
-    errno = n;
-    return -1;
-}
-
-long __set_errno_internal(int n) {
-    errno = n;
-    return -1;
-}
 
 static __thread void *tls_hooks[16];
 

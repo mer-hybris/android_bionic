@@ -104,22 +104,35 @@ void __libc_init_tls(KernelArgumentBlock& args) {
   __init_alternate_signal_stack(&main_thread);
 }
 
-void __libc_init_common(KernelArgumentBlock& args) {
+extern "C" int my_printf(const char *f, ...);
+
+void __libc_init_common(KernelArgumentBlock& args, int hybris) {
   // Initialize various globals.
-  environ = args.envp;
+  if(!hybris)
+  {
+    environ = args.envp;
+  }
+
   errno = 0;
-  __libc_auxv = args.auxv;
-  __progname = args.argv[0] ? args.argv[0] : "<unknown>";
-  __abort_message_ptr = args.abort_message_ptr;
+
+  if(!hybris)
+  {
+    __libc_auxv = args.auxv;
+    __progname = args.argv[0] ? args.argv[0] : "<unknown>";
+    __abort_message_ptr = args.abort_message_ptr;
+  }
 
   // AT_RANDOM is a pointer to 16 bytes of randomness on the stack.
   __stack_chk_guard = *reinterpret_cast<uintptr_t*>(getauxval(AT_RANDOM));
 
   // Get the main thread from TLS and add it to the thread list.
-  pthread_internal_t* main_thread = __get_thread();
-  __pthread_internal_add(main_thread);
+  if(!hybris)
+  {
+    pthread_internal_t* main_thread = __get_thread();
+    __pthread_internal_add(main_thread);
 
-  __system_properties_init(); // Requires 'environ'.
+    __system_properties_init(); // Requires 'environ'.
+  }
 
   __libc_init_vdso();
 }

@@ -51,7 +51,7 @@ __END_DECLS
 #if defined(__cplusplus)
 
 class KernelArgumentBlock;
-__LIBC_HIDDEN__ void __libc_init_common(KernelArgumentBlock& args);
+__LIBC_HIDDEN__ void __libc_init_common(KernelArgumentBlock& args, int hybris = 0);
 
 __LIBC_HIDDEN__ void __libc_init_AT_SECURE(KernelArgumentBlock& args);
 

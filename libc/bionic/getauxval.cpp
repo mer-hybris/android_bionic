@@ -35,7 +35,13 @@
 
 __LIBC_HIDDEN__ ElfW(auxv_t)* __libc_auxv = NULL;
 
-extern "C" unsigned long int getauxval(unsigned long int type) {
+#ifdef HYBRIS
+#define ATTRIBUTE_WEAK __attribute__((weak))
+#else
+#define ATTRIBUTE_WEAK
+#endif
+
+extern "C" unsigned long int ATTRIBUTE_WEAK getauxval(unsigned long int type) {
   for (ElfW(auxv_t)* v = __libc_auxv; v->a_type != AT_NULL; ++v) {
     if (v->a_type == type) {
       return v->a_un.a_val;

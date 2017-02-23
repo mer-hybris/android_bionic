@@ -33,6 +33,7 @@ struct abort_msg_t;
 class KernelArgumentBlock {
  public:
   KernelArgumentBlock(void* raw_args) {
+#ifndef HYBRIS
     uintptr_t* args = reinterpret_cast<uintptr_t*>(raw_args);
     argc = static_cast<int>(*args);
     argv = reinterpret_cast<char**>(args + 1);
@@ -47,6 +48,9 @@ class KernelArgumentBlock {
     ++p; // Skip second NULL;
 
     auxv = reinterpret_cast<ElfW(auxv_t)*>(p);
+#else
+    (void)raw_args;
+#endif
   }
 
   // Similar to ::getauxval but doesn't require the libc global variables to be set up,

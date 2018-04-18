@@ -37,11 +37,11 @@
 
 #include "private/bionic_macros.h"
 
-#if defined(__BIONIC_BUILD_FOR_ANDROID_SUPPORT)
+//#if defined(__BIONIC_BUILD_FOR_ANDROID_SUPPORT)
 #define USE_TLS_SLOT 0
-#else
-#define USE_TLS_SLOT 1
-#endif
+//#else
+//#define USE_TLS_SLOT 1
+//#endif
 
 #if USE_TLS_SLOT
 #include "bionic/pthread_internal.h"
